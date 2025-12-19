@@ -22,11 +22,30 @@ def test_add():
     assert res.get_json()["result"] == 5.0
 
 #引き算を検証するテスト（途中まで記述）
-def test_subtract():
+def test_sub():
     client = app.test_client()
-    res = post(client, {　　　　　　　　})
+    res = client.post("/calc", json={"a": 4, "op": "-", "b": 3})
     assert res.status_code == 200
-    assert res.get_json()["result"] == 
+    assert res.get_json()["result"] == 1.0
 
+    #掛け算を検証するテスト（途中まで記述）
+def test_by():
+    client = app.test_client()
+    res = client.post("/calc", json={"a": 4, "op": "*", "b": 3})
+    assert res.status_code == 200
+    assert res.get_json()["result"] == 12.0
+
+    #割り算を検証するテスト（途中まで記述）
+def test_div():
+    client = app.test_client()
+    res = client.post("/calc", json={"a": 4, "op": "/", "b": 2})
+    assert res.status_code == 200
+    assert res.get_json()["result"] == 2.0
 
 #他のテスト項目も記述してみよう（仕様書を参考に）
+def test_div_zero():
+    client = app.test_client()
+    res = client.post("/calc", json={"a": 4, "op": "/", "b": 0})
+    assert res.status_code == 200
+    assert res.get_json()["error"] == "DIVIDE_BY_ZERO"
+
