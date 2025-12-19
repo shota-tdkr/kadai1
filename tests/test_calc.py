@@ -46,6 +46,6 @@ def test_div():
 def test_div_zero():
     client = app.test_client()
     res = client.post("/calc", json={"a": 4, "op": "/", "b": 0})
-    assert res.status_code == 200
+    assert res.status_code == 400
     assert res.get_json()["error"] == "DIVIDE_BY_ZERO"
 
